@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Tea Search</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="static/assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body id="top">
+
+		<!-- Header -->
+			<header id="header">
+				<a href="/" class="image avatar"><img src="static/assets/images/tea2.1.jpg" alt="" /></a>
+				<h1><strong>Tea Search</strong><br>
+				<div id="menubar">
+          <ul id="menu">
+            <li><a href="/flavour">Flavour</a></li>
+            <li><a href="/ingredients">Ingredients</a></li>
+          	<div class="dropdown">
+  				<button onclick="myFunction()" class="dropbtn">Types</button>
+  				<div id="myDropdown" class="dropdown-content">
+   					<a href="/white">White</a>
+   					<a href="/yellow">Yellow</a>
+   					<a href="/green">Green</a>
+    				<a href="/oolong">Oolong</a>
+    				<a href="/black">Black</a>
+    				<a href="/dark">Dark</a>
+    				<a href="/red">Red</a>
+    				<a href="/herbal">Herbal</a>
+  				</div>
+			</div>
+  			</form>
+  		</div>
+          </ul>
+        </div></h1>
+			</header>
+		<!-- Main -->
+			<div id="main">
+				
+			{% block content %} {% endblock %}
+
+			</div>			
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="copyright">
+					<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+				</ul>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.poptrox.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
