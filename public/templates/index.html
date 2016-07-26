@@ -3,87 +3,87 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--[if lte IE 8]><script src="../static/assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="../static/assets/css/main.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="../static/assets/css/ie8.css" /><![endif]-->
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>A New Startup: Sign Up Today!</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="../static/bootstrap/css/theme/flatly/bootstrap.css" rel="stylesheet">
-    
-    <!-- Custom styles for this template -->
-    <link href="../static/bootstrap/css/jumbotron-narrow.css" rel="stylesheet">
+    <link rel="icon" href="../static/images/tea2.1.jpg">
+    <title>Tea Search</title>
 
   </head>
 
   <body>
 
-    <div class="container">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Press</a></li>
-        </ul>
-        <h3 class="text-muted">A New Startup</h3>
+  <body id="top">
+
+  <!-- Header -->
+  <header id="header">
+    <a href="/" class="image avatar"><img src="../static/images/tea2.1.jpg" alt="" /></a>
+    <h1><strong>Tea Search</strong><br>
+      <div id="menubar">
+        <ul id="menu">
+          <li><a href="/flavour">Flavour</a></li>
+          <li><a href="/ingredients">Ingredients</a></li>
+          <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Types</button>
+            <div id="myDropdown" class="dropdown-content">
+              <a href="/white">White</a>
+              <a href="/yellow">Yellow</a>
+              <a href="/green">Green</a>
+              <a href="/oolong">Oolong</a>
+              <a href="/black">Black</a>
+              <a href="/dark">Dark</a>
+              <a href="/red">Red</a>
+              <a href="/herbal">Herbal</a>
+            </div>
+          </div>
+          </form>
       </div>
-    	
-      <div id="signupSuccess" class="alert alert-success" style="display:none">
-        <p id="signupSuccessText">Thanks for signing up! You'll be among the first to know when we launch.</p>
-      </div>
-      <div id="signupDuplicate" class="alert alert-success" style="display:none">
-        <p id="signupDuplicateText">Fear not, you're already on the list! You'll be among the first to know when we launch.</p>
-      </div>
-      <div id="signupError" class="alert alert-info" style="display:none">
-        <p id="signupErrorText">Well this is embarrassing. It looks like we're having trouble getting you on the list.</p>
-      </div>
-      <div class="jumbotron">
-        <h1>The next big thing is coming...</h1>
-        <p class="lead">We're pretty thrilled to unveil our latest creation. Sign up below to be notified when we officially launch!</p>
-        <p><a class="btn btn-lg btn-success"  data-toggle="modal" href="#signupModal">Sign up today</a></p>
-      </div>
+      </ul>
+      </div></h1>
+  </header>
+  <!-- Main -->
+  <div id="main">
+
+    <!-- One -->
+    <section id="one">
+      <header class="major">
+        <h2>Search for your favourite teas</h2>
+      </header>
 
 
-      <div class="footer">
-        <p>&copy; A New Startup 2013</p>
-      </div>
-      
-      <!-- Modal -->
-       <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModal" aria-hidden="true">
-         <div class="modal-dialog">
-           <div class="modal-content">
-             <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-               <h4 class="modal-title">Provide a few details and we'll be in touch...</h4>
-             </div>
-             <div class="modal-body">
-               <form id="signupForm" role="form">
-                 <input type="hidden" id="theme" name="theme" value="flatly"/>
-                 <div class="form-group">
-                   <label for="name">Name</label>
-                   <input type="text" class="form-control" id="name" name="name" placeholder="Your name">
-                 </div>
-                 <div class="form-group">
-                   <label for="email">Email address</label>
-                   <input type="email" class="form-control" id="email" name="email" placeholder="Your email address">
-                 </div>
-                 <div class="form-group">
-                   <label for="previewAccess">Interested in Preview Access?</label>
-                   <select class="form-control" name="previewAccess">
-                     <option>Yes</option>
-                     <option>No</option>
-                   </select>
-                 </div>
-             </div>
-             <div class="modal-footer">
-               <button id="signup" type="button" class="btn btn-primary">Sign Up!</button>
-             </div>
-           </div><!-- /.modal-content -->
-         </div><!-- /.modal-dialog -->
-       </div><!-- /.modal -->
+      <div class="row">
+        <div class="8u 12u$(2)">
+          <form method="post" action="#">
+            <div class="row uniform 50%">
 
-    </div> <!-- /container -->
+              <div class="12u$"><input type = "text" name="teaSearch" id="message" placeholder="Search teas" ></textarea></div>
+            </div>
+            &nbsp;<br />
+            <ul class="actions">
+              <li><input type="submit" value="Find" /></li>
+            </ul>
+          </form>
+        </div>
+        <div class="4u$ 12u$(2)">
+
+        </div>
+      </div>
+    </section>
+
+    <section>
+
+    </section>
+
+  </div>
+
+  <footer id="footer">
+    <ul class="copyright">
+      <li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+    </ul>
+  </footer>
 
     <script src="../static/jquery/jquery.js"></script>
     <script src="../static/bootstrap/js/bootstrap.min.js"></script>

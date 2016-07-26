@@ -4,5 +4,6 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { appTitle: 'A New Startup: Sign Up Today!'});
+  var path = require('path');
+  res.sendfile(path.resolve('public/templates/index.html'));
 };

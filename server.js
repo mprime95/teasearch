@@ -36,48 +36,48 @@ config = JSON.parse(config);
 
 //Create DynamoDB client and pass in region.
 var db = new AWS.DynamoDB({region: config.AWS_REGION});
-//Create SNS client and pass in region.
-var sns = new AWS.SNS({ region: config.AWS_REGION});
 
 //GET home page.
 app.get('/', routes.index);
 
+
+
 //POST signup form.
-app.post('/signup', function(req, res) {
-  var nameField = req.body.name,
-      emailField = req.body.email,
-      previewBool = req.body.previewAccess;
-  res.send(200);
-  signup(nameField, emailField, previewBool);
-});
+//app.post('/signup', function(req, res) {
+// var nameField = req.body.name,
+//      emailField = req.body.email,
+//      previewBool = req.body.previewAccess;
+//  res.send(200);
+//  signup(nameField, emailField, previewBool);
+//});
 
 //Add signup form data to database.
-var signup = function (nameSubmitted, emailSubmitted, previewPreference) {
-  var formData = {
-    TableName: config.STARTUP_SIGNUP_TABLE,
-    Item: {
-      email: {'S': emailSubmitted}, 
-      name: {'S': nameSubmitted},
-      preview: {'S': previewPreference}
-    }
-  };
-  db.putItem(formData, function(err, data) {
-    if (err) {
-      console.log('Error adding item to database: ', err);
-    } else {
-      console.log('Form data added to database.');
-      var snsMessage = 'New signup: %EMAIL%'; //Send SNS notification containing email from form.
-      snsMessage = snsMessage.replace('%EMAIL%', formData.Item.email['S']);
-      sns.publish({ TopicArn: config.NEW_SIGNUP_TOPIC, Message: snsMessage }, function(err, data) {
-        if (err) {
-          console.log('Error publishing SNS message: ' + err);
-        } else {
-          console.log('SNS message sent.');
-        }
-      });  
-    }
-  });
-};
+//var signup = function (nameSubmitted, emailSubmitted, previewPreference) {
+//  var formData = {
+//    TableName: config.STARTUP_SIGNUP_TABLE,
+//    Item: {
+//      email: {'S': emailSubmitted},
+//      name: {'S': nameSubmitted},
+//      preview: {'S': previewPreference}
+//    }
+//  };
+//  db.putItem(formData, function(err, data) {
+//    if (err) {
+//      console.log('Error adding item to database: ', err);
+//    } else {
+//      console.log('Form data added to database.');
+//      var snsMessage = 'New signup: %EMAIL%'; //Send SNS notification containing email from form.
+//      snsMessage = snsMessage.replace('%EMAIL%', formData.Item.email['S']);
+//      sns.publish({ TopicArn: config.NEW_SIGNUP_TOPIC, Message: snsMessage }, function(err, data) {
+//       if (err) {
+//          console.log('Error publishing SNS message: ' + err);
+//        } else {
+//          console.log('SNS message sent.');
+//        }
+//      });
+//    }
+//  });
+//};
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

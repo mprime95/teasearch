@@ -1,5 +1,4 @@
 { 
-  "AWS_REGION": "",
-  "STARTUP_SIGNUP_TABLE": "",
-  "NEW_SIGNUP_TOPIC": ""
+  "AWS_REGION": "us-east-1",
+  "STARTUP_TEA_TABLE": "tea-app"
 }
