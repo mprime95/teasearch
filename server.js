@@ -33,14 +33,43 @@ app.locals.theme = process.env.THEME; //Make the THEME environment variable avai
 //Read config values from a JSON file.
 var config = fs.readFileSync('./app_config.json', 'utf8');
 config = JSON.parse(config);
-
+console.log(config);
 //Create DynamoDB client and pass in region.
 var db = new AWS.DynamoDB({region: config.AWS_REGION});
+
+var docClient = new AWS.DynamoDB.DocumentClient({region: config.AWS_REGION});
 
 //GET home page.
 app.get('/', routes.index);
 
 
+//POST results
+app.post('/search', function(req, res) {
+    console.log(req.body)
+    console.log("Querying for teas called " + req.body.name);
+    var params = {
+        TableName : "tea-app",
+        KeyConditionExpression: "#nm = :teaName",
+        ExpressionAttributeNames:{
+            "#nm": "name"
+        },
+        ExpressionAttributeValues: {
+            ":teaName": req.body.name
+        }
+    };
+
+    docClient.query(params, function(err, data) {
+        if (err) {
+            console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Query succeeded.");
+            data.Items.forEach(function(item) {
+                console.log(" -", item.name + ": " + item.Type);
+            });
+            res.json({items: data.Items});
+        }
+    });
+});
 
 //POST signup form.
 //app.post('/signup', function(req, res) {
