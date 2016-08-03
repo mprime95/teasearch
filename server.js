@@ -42,54 +42,87 @@ var docClient = new AWS.DynamoDB.DocumentClient({region: config.AWS_REGION});
 //GET home page.
 app.get('/', routes.index);
 
+function teaObject(name, type, desc, img, ing){
+    this.name = name;
+    this.type = type;
+    this.desc = desc;
+    this.img = img;
+    this.ing = ing;
+}
 
-//POST results
-app.post('/search', function(req, res) {
-    console.log(req.body)
-    console.log("Querying for teas called " + req.body.name);
-    var params = {
+var teas = [];
+var params = {
         TableName : "tea-app",
-        KeyConditionExpression: "#nm = :teaName",
-        ExpressionAttributeNames:{
-            "#nm": "name"
-        },
-        ExpressionAttributeValues: {
-            ":teaName": req.body.name
+        ProjectionExpression: "#nm, #tp, Ingredients, Description, Image_URL",
+          ExpressionAttributeNames:{
+            "#nm": "name",
+            "#tp":"Type"
         }
     };
+console.log("Scanning tea table.");
+docClient.scan(params, onScan);
 
-    docClient.query(params, function(err, data) {
-        if (err) {
-            console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Query succeeded.");
-            data.Items.forEach(function(item) {
-                console.log(" -", item.name + ": " + item.Type);
-            });
-            res.json({items: data.Items});
+//Store Dynamodb data
+function onScan(err, data) {
+    var count = 0
+    if (err) {
+        console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+    } else {
+        // print all the teas
+        console.log("Scan succeeded.");
+        data.Items.forEach(function(tea) {
+            var ing = [];
+            ing = tea.Ingredients;
+            var x = new teaObject(tea.name, tea.Type, tea.Description, tea.Image_URL, ing);
+
+            teas[count] = x;
+
+              console.log(
+                x);
+//                tea.name + ": ",
+//                tea.Type + " Ingredients:",
+//                ing);
+        });
+
+        // continue scanning if we have more movies
+        if (typeof data.LastEvaluatedKey != "undefined") {
+            console.log("Scanning for more...");
+            params.ExclusiveStartKey = data.LastEvaluatedKey;
+            docClient.scan(params, onScan);
         }
-    });
-});
+    }
+}
 
-//POST signup form.
-//app.post('/signup', function(req, res) {
-// var nameField = req.body.name,
-//      emailField = req.body.email,
-//      previewBool = req.body.previewAccess;
-//  res.send(200);
-//  signup(nameField, emailField, previewBool);
+////POST results
+//app.post('/search', function(req, res) {
+//    console.log(req.body)
+//    console.log("Querying for teas called " + req.body.name);
+//    var params = {
+//        TableName : "tea-app",
+//        KeyConditionExpression: "#nm = :teaName",
+//        ExpressionAttributeNames:{
+//            "#nm": "name"
+//        },
+//        ExpressionAttributeValues: {
+//            ":teaName": req.body.name
+//        }
+//    };
+//
+//    docClient.query(params, function(err, data) {
+//        if (err) {
+//            console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+//        } else {
+//            console.log("Query succeeded.");
+//            data.Items.forEach(function(item) {
+//                console.log(" -", item.name + ": " + item.Type);
+//            });
+//            res.json({items: data.Items});
+//        }
+//    });
 //});
 
-//Add signup form data to database.
-//var signup = function (nameSubmitted, emailSubmitted, previewPreference) {
-//  var formData = {
-//    TableName: config.STARTUP_SIGNUP_TABLE,
-//    Item: {
-//      email: {'S': emailSubmitted},
-//      name: {'S': nameSubmitted},
-//      preview: {'S': previewPreference}
-//    }
-//  };
+
+
 //  db.putItem(formData, function(err, data) {
 //    if (err) {
 //      console.log('Error adding item to database: ', err);
