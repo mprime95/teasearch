@@ -1715,7 +1715,7 @@
 	}
 
 	header p {
-		color: #b2b2b2;
+		color: #49bf9d;
 		position: relative;
 		margin: 0 0 1.5em 0;
 	}
@@ -2259,13 +2259,13 @@
 	}
 
 		table tbody tr {
-			border: solid 1px #efefef;
+			border: solid 1px #49bf9d;
 			border-left: 0;
 			border-right: 0;
 		}
 
 			table tbody tr:nth-child(2n + 1) {
-				background-color: #f7f7f7;
+				background-color: transparent;
 			}
 
 		table td {
@@ -2273,19 +2273,19 @@
 		}
 
 		table th {
-			color: #787878;
-			font-size: 0.9em;
+			color: #999999;
+			font-size: 1em;
 			font-weight: 400;
 			padding: 0 0.75em 0.75em 0.75em;
 			text-align: left;
 		}
 
 		table thead {
-			border-bottom: solid 2px #efefef;
+			border-bottom: solid 2px #49bf9d;
 		}
 
 		table tfoot {
-			border-top: solid 2px #efefef;
+			border-top: solid 2px #49bf9d;
 		}
 
 		table.alt {
@@ -2293,7 +2293,7 @@
 		}
 
 			table.alt tbody tr td {
-				border: solid 2px #efefef;
+				border: solid 2px #49bf9d;
 				border-left-width: 0;
 				border-top-width: 0;
 			}
@@ -2554,9 +2554,9 @@
 	}
 
 		#main > section {
-			border-top: solid 2px #efefef;
+			border-top: solid 2px #49bf9d;
 			margin: 4em 0 0 0;
-			padding: 4em 0 0 0;
+			padding: 0em 0 0 0;
 		}
 
 			#main > section:first-child {

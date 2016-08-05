@@ -3,74 +3,15 @@
     {
       "PutRequest": {
         "Item": {
-          "name": {
-            "S": "Earl Grey"
-          },
-          "Image_URL": {
-            "S": "https://teforia.com/assets/images/blog/earl-grey-tea.jpg"
-          },
-          "Description": {
-            "S": "A tea blend which has been flavored with the addition of oil of bergamot."
-          },
-          "Type": {
-            "S": "Black"
-          },
-          "Ingredients": {
-            "L": [
-              {
-                "S": "Black tea",
-                "S": "bergamont oil"
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "name": {
-            "S": "Rooibos"
-          },
-          "Image_URL": {
-            "S": "https://upload.wikimedia.org/wikipedia/commons/4/46/Rooibos_geschnitten.jpg"
-          },
-          "Description": {
-            "S": "A traditional South African blend"
-          },
-          "Type": {
-            "S": "Red"
-          },
-          "Ingredients": {
-            "L": [
-              {
-                "S": "Rooibos"
-              }
-            ]
-          }
-        }
-      }
-    },
-    {
-      "PutRequest": {
-        "Item": {
-          "name": {
+          "Name": {
             "S": "Dragon Well"
-          },
-          "Image_URL": {
-            "S": "http://www.herbalteasonline.com/wp-content/uploads/2016/06/Longjing-Tea-Pictures.jpg"
-          },
-          "Description": {
-            "S": "A variety of pan-roasted green tea from the area of Longjing Village near Hangzhou in Zhejiang Province, China."
           },
           "Type": {
             "S": "Green"
           },
           "Ingredients": {
             "L": [
-              {
-                "S": "Green tea"
-              }
+              {"S": "Green Tea"}
             ]
           }
         }
@@ -79,24 +20,107 @@
     {
       "PutRequest": {
         "Item": {
-          "name": {
+          "Name": {
+            "S": "Earl Grey"
+          },
+          "Type": {
+            "S": "Black"
+          },
+          "Ingredients": {
+            "L": [
+              {"S": "Bergamont Oil"},
+              {"S": "Black Tea"}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "Name": {
+            "S": "English Breakfast"
+          },
+          "Type": {
+            "S": "Black"
+          },
+          "Ingredients": {
+            "L": [
+              {"S": "Black Tea"}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "Name": {
             "S": "Lavender"
-          },
-          "Image_URL": {
-            "S": "http://l7.alamy.com/zooms/0b70096276cd473da7e4b60863bb6b52/lavender-tea-dxahxw.jpg"
-          },
-          "Description": {
-            "S": "A floral tea with a healthy dose of vitamin C"
           },
           "Type": {
             "S": "Herbal"
           },
           "Ingredients": {
             "L": [
-              {
-                "S": "Lavender blossoms",
-                "S": "Rose hips"
-              }
+              {"S": "Lavender Blossoms"},
+              {"S": "Rose Hips"}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "Name": {
+            "S": "Peppermint"
+          },
+          "Type": {
+            "S": "Herbal"
+          },
+          "Ingredients": {
+            "L": [
+              {"S": "Peppermint"}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "Name": {
+            "S": "Pumpkin Spice"
+          },
+          "Type": {
+            "S": "Black"
+          },
+          "Ingredients": {
+            "L": [
+              {"S": "All Spice"},
+              {"S": "Black Tea"},
+              {"S": "Cinnamon"},
+              {"S": "Clove"},
+              {"S": "Ginger"},
+              {"S": "Nutmeg"}
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "Name": {
+            "S": "Rooibos"
+          },
+          "Type": {
+            "S": "Red"
+          },
+          "Ingredients": {
+            "L": [
+              {"S": "Rooibos"}
             ]
           }
         }

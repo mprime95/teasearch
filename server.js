@@ -42,45 +42,35 @@ var docClient = new AWS.DynamoDB.DocumentClient({region: config.AWS_REGION});
 //GET home page.
 app.get('/', routes.index);
 
-function teaObject(name, type, desc, img, ing){
+function teaObject(name, type, ing){
     this.name = name;
     this.type = type;
-    this.desc = desc;
-    this.img = img;
     this.ing = ing;
 }
 
 var teas = [];
 var params = {
         TableName : "tea-app",
-        ProjectionExpression: "#nm, #tp, Ingredients, Description, Image_URL",
+        ProjectionExpression: "#nm, #tp, Ingredients",
           ExpressionAttributeNames:{
-            "#nm": "name",
+            "#nm": "Name",
             "#tp":"Type"
         }
     };
-console.log("Scanning tea table.");
 docClient.scan(params, onScan);
 
 //Store Dynamodb data
 function onScan(err, data) {
-    var count = 0
     if (err) {
         console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
     } else {
         // print all the teas
-        console.log("Scan succeeded.");
         data.Items.forEach(function(tea) {
             var ing = [];
             ing = tea.Ingredients;
-            var x = new teaObject(tea.name, tea.Type, tea.Description, tea.Image_URL, ing);
+            var x = new teaObject(tea.Name, tea.Type, ing);
 
-            teas[count] = x;
-
-            count++;
-
-              console.log(
-                x.name)
+            teas.push(x);
         });
 
         // continue scanning if we have more movies
@@ -96,54 +86,6 @@ function onScan(err, data) {
 app.get('/search', function(req, res){
     res.send(teas);
 })
-
-////POST results
-//app.post('/search', function(req, res) {
-//    console.log(req.body)
-//    console.log("Querying for teas called " + req.body.name);
-//    var params = {
-//        TableName : "tea-app",
-//        KeyConditionExpression: "#nm = :teaName",
-//        ExpressionAttributeNames:{
-//            "#nm": "name"
-//        },
-//        ExpressionAttributeValues: {
-//            ":teaName": req.body.name
-//        }
-//    };
-//
-//    docClient.query(params, function(err, data) {
-//        if (err) {
-//            console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
-//        } else {
-//            console.log("Query succeeded.");
-//            data.Items.forEach(function(item) {
-//                console.log(" -", item.name + ": " + item.Type);
-//            });
-//            res.json({items: data.Items});
-//        }
-//    });
-//});
-
-
-
-//  db.putItem(formData, function(err, data) {
-//    if (err) {
-//      console.log('Error adding item to database: ', err);
-//    } else {
-//      console.log('Form data added to database.');
-//      var snsMessage = 'New signup: %EMAIL%'; //Send SNS notification containing email from form.
-//      snsMessage = snsMessage.replace('%EMAIL%', formData.Item.email['S']);
-//      sns.publish({ TopicArn: config.NEW_SIGNUP_TOPIC, Message: snsMessage }, function(err, data) {
-//       if (err) {
-//          console.log('Error publishing SNS message: ' + err);
-//        } else {
-//          console.log('SNS message sent.');
-//        }
-//      });
-//    }
-//  });
-//};
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
