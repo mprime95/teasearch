@@ -77,11 +77,10 @@ function onScan(err, data) {
 
             teas[count] = x;
 
+            count++;
+
               console.log(
-                x);
-//                tea.name + ": ",
-//                tea.Type + " Ingredients:",
-//                ing);
+                x.name)
         });
 
         // continue scanning if we have more movies
@@ -92,6 +91,11 @@ function onScan(err, data) {
         }
     }
 }
+
+//POST Results
+app.get('/search', function(req, res){
+    res.send(teas);
+})
 
 ////POST results
 //app.post('/search', function(req, res) {
@@ -144,3 +148,5 @@ function onScan(err, data) {
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+

@@ -55,18 +55,12 @@
 
 
       <div class="row">
-        <div class="8u 12u$(2)">
-
-            <div class="row uniform 50%">
-
-              <div class="12u$"><input type = "text" name="teaSearch" id="searchQuery" placeholder="Search teas" ></div>
-            </div>
-            &nbsp;<br />
-            <ul class="actions">
-              <li><button id="button">Search</button></li>
-            </ul>
-
-        </div>
+        <form id="live-search" action="" class="styled" method="post">
+          <fieldset>
+            <input type="text" class="text-input" id="filter" value="" />
+            <span id="filter-count"></span>
+          </fieldset>
+        </form>
         <div class="4u$ 12u$(2)">
 
         </div>
@@ -88,49 +82,91 @@
 
     <script src="../static/jquery/jquery.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
-       $("#button").on('click', function(e){
-           e.preventDefault();
-	$.ajax({
+      $(document).ready(function(){
+    $("#filter").keyup(function(){
+         $.get('/search', null, function(data){
+          console.log(data.length);
 
-        // The URL for the request
-        url: "/search",
+        // Retrieve the input field text and reset the count to zero
+        var filter = $("#filter").val(), count = 0;
+        console.log($("#filter").val());
 
-        // The data to send (will be converted to a query string)
-        data: {
-            name: $("#searchQuery").val()
-        },
+        // Loop through the comment list
+//        $("data").each(function(){
+          for(i=0; i<data.length; i++){
 
-        // Whether this is a POST or GET request
-        type: "POST",
+            if(data[i].name.search(new RegExp(filter, "i")) < 0){
+              console.log("no");
+            }else{
+              console.log(data[i]);
+              count++;
+            }
 
-        // The type of data we expect back
-        dataType : "json",
-    })
-      // Code to run if the request succeeds (is done);
-      // The response is passed to the function
-      .done(function( json ) {
-         //$( "<h1>" ).text( json.title ).appendTo( "body" );
-         //$( "<div class=\"content\">").html( json.html ).appendTo( "body" );
-         //document.getElementById("results").innerHTML = ($("#searchQuery").val())
-         $.each(json.items, function(i, item){
-          document.getElementById("results").innerHTML = (item.name);
-         })
-      })
-      // Code to run if the request fails; the raw request and
-      // status codes are passed to the function
-      .fail(function( xhr, status, errorThrown ) {
-        alert( "Sorry, there was a problem!" );
-        console.log( "Error: " + errorThrown );
-        console.log( "Status: " + status );
-        console.dir( xhr );
-      })
-      // Code to run regardless of success or failure;
-      .always(function( xhr, status ) {
-      });
-     });
+            <!--// If the list item does not contain the text phrase fade it out-->
+            <!--if ($(data).text().search(new RegExp(filter, "i")) < 0) {-->
+                <!--//$(data).fadeOut();-->
+                <!--console.log(this);-->
 
-    })
+            <!--// Show the list item if the phrase matches and increase the count by 1-->
+            <!--} else {-->
+                <!--$(this).show();-->
+                <!--//count++;-->
+            <!--}-->
+
+        };
+
+        // Update the count
+        var numberItems = count;
+        $("#filter-count").text("Number of teas = "+count);
+    });
+});
+});
+
+
+
+    <!--$(document).ready(function() {-->
+       <!--$("#button").on('click', function(e){-->
+           <!--e.preventDefault();-->
+	<!--$.ajax({-->
+
+        <!--// The URL for the request-->
+        <!--url: "/search",-->
+
+        <!--// The data to send (will be converted to a query string)-->
+        <!--data: {-->
+            <!--name: $("#searchQuery").val()-->
+        <!--},-->
+
+        <!--// Whether this is a POST or GET request-->
+        <!--type: "POST",-->
+
+        <!--// The type of data we expect back-->
+        <!--dataType : "json",-->
+    <!--})-->
+      <!--// Code to run if the request succeeds (is done);-->
+      <!--// The response is passed to the function-->
+      <!--.done(function( json ) {-->
+         <!--//$( "<h1>" ).text( json.title ).appendTo( "body" );-->
+         <!--//$( "<div class=\"content\">").html( json.html ).appendTo( "body" );-->
+         <!--//document.getElementById("results").innerHTML = ($("#searchQuery").val())-->
+         <!--$.each(json.items, function(i, item){-->
+          <!--document.getElementById("results").innerHTML = (item.name);-->
+         <!--})-->
+      <!--})-->
+      <!--// Code to run if the request fails; the raw request and-->
+      <!--// status codes are passed to the function-->
+      <!--.fail(function( xhr, status, errorThrown ) {-->
+        <!--alert( "Sorry, there was a problem!" );-->
+        <!--console.log( "Error: " + errorThrown );-->
+        <!--console.log( "Status: " + status );-->
+        <!--console.dir( xhr );-->
+      <!--})-->
+      <!--// Code to run regardless of success or failure;-->
+      <!--.always(function( xhr, status ) {-->
+      <!--});-->
+     <!--});-->
+
+    <!--})-->
     </script>
   </body>
 </html>
